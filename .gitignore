@@ -1,0 +1,10 @@
+
+__pycache__/
+
+experiment_checkpoints/DeformableSkipResNetWithEdges_epochs3/lightning_logs/version_9721236/checkpoints/
+
+experiment_checkpoints/
+
+lisa_checkpoints/
+
+model_checkpoints/
