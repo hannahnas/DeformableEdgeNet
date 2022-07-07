@@ -2,7 +2,7 @@ from decoder import ResNetDecoder
 from encoder import ResNetEncoder
 from skip_resnet import SkipResNet
 import pytorch_lightning as pl
-from criterions import L1_loss, masked_MAE, SSIM_score
+from criterions import L1_loss, masked_MAE, masked_RMSE, SSIM_score
 from torch import optim
 import torch
 
@@ -106,7 +106,10 @@ class SkipResNetModel(pl.LightningModule):
             depth_pred = self.forward(batch)
 
         mae = masked_MAE(depth_pred, depth_gt, mask)
+        mse, rmse = masked_RMSE(depth_pred, depth_gt, mask)
         ssim = SSIM_score(depth_pred, depth_gt, mask)
 
         self.log('test_masked_MAE', mae)
-        self.log('ssim', ssim)
+        self.log('test_masked_MSE', mse)
+        self.log('test_masked_RMSE', rmse)
+        self.log('test_ssim', ssim)
